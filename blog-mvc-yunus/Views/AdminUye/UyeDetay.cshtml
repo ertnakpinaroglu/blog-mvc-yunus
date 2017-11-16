@@ -1,0 +1,66 @@
+﻿@model blog_mvc_yunus.Models.Uyeler
+
+@{
+    ViewBag.Title = "UyeDetay";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="text-center">Üye Detay Sayfası</h2>
+
+<div>
+    <h4>Uyeler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Yetkilendirme.Yetkisi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Yetkilendirme.Yetkisi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UyeAdSoyad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UyeAdSoyad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UyeFoto)
+        </dt>
+
+        <dd>
+           <img src="@Model.UyeFoto" class="img-circle" width="100" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarih)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KullaniciAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KullaniciAdi)
+        </dd>
+
+       
+
+    </dl>
+</div>
+<p>
+   
+    <a href="/AdminUye/UyeListele/" class=" btn btn-primary">
+        <span class="fa fa-backward">
+            Geri 
+        </span>
+    </a>
+
+</p>

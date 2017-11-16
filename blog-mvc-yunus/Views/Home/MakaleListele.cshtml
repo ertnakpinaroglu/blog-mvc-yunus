@@ -1,0 +1,51 @@
+﻿@model IEnumerable<blog_mvc_yunus.Models.Makaleler>
+
+@{
+    ViewBag.Title = "MakaleListele";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+
+<h2>MakaleListele</h2>
+
+<style>
+    .col-sm-6 {
+        margin-bottom: 10px;
+    }
+</style>
+
+
+<div class="row">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-sm-6 col-md-12">
+
+                <div class="thumbnail">
+                    <img src="@item.MakaleFoto" style="width:250px; height:250px;" alt="...">
+                    <div class="caption">
+                        <h3>@item.MakaleBasligi</h3>
+                        <span class="glyphicon glyphicon-time">@String.Format("{0:D}",item.MakaleTarih).Trim()</span>
+                        &nbsp;<span class="glyphicon glyphicon-eye-open">@item.OkunmaSayisi</span>
+                        <p>
+                            @{ String kısalt = "";
+                            }
+
+                            @if (item.MakaleIcerik.Length > 10)
+                            {
+                                kısalt = item.MakaleIcerik.Substring(0, 250);
+                            }
+                            @Html.Raw(kısalt)
+                            
+
+                        </p>
+                        <a href="/Home/MakaleDetay/@item.MakaleId/" class="btn btn-danger">
+                            Devamını oku
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+           }
+
+    </div>

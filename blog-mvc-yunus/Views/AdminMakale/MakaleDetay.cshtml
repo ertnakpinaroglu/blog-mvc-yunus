@@ -1,0 +1,68 @@
+﻿@model blog_mvc_yunus.Models.Makaleler
+
+@{
+    ViewBag.Title = "MakaleDetay";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="text-center">Makale Detay Sayfası</h2>
+
+<div>
+    <h4>Makaleler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategoriler.KategoriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategoriler.KategoriAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MakaleBasligi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MakaleBasligi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MakaleIcerik)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.MakaleIcerik)
+            @*@Html.DisplayFor(model => model.MakaleIcerik)*@
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MakaleFoto)
+        </dt>
+
+        <dd>
+          <img src="@Model.MakaleFoto" class="img-rounded" width="170" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MakaleTarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MakaleTarih)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    <a href="/AdminMakale/MakaleListele/" class="btn btn-primary">
+        <span class="fa fa-backward"> Geri</span>
+    </a>
+
+    <a href="/AdminMakale/MakaleDuzenle/@Model.MakaleId" class="btn btn-success">
+        <span class="fa fa-edit"> Düzenle</span>
+    </a>
+    
+  
+</p>

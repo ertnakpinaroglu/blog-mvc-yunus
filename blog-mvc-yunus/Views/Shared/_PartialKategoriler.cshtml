@@ -1,0 +1,37 @@
+﻿@model IEnumerable<blog_mvc_yunus.Models.Kategoriler>
+
+@{
+    Layout = null;
+}
+@Styles.Render("~/homepage/css")
+@Scripts.Render("~/homepage/js")
+
+
+
+<div class="list-group">
+    <div class="list-group-item active">Kategoriler</div>
+
+    @foreach (var item in Model)
+    {
+
+        <a href="/Home/MakaleListele/@item.KategoriId" class="list-group-item">@item.KategoriAdi <span class="badge">@item.Makalelers.Count()</span></a>
+
+    }
+
+</div>
+
+<!-- Kategorilere tıkladngı zaman linki aktif yapmak için -->
+@*<script type="text/javascript">
+    $('ul#kategoriler').on('click', 'li', function (e) {
+        $('ul#kategoriler li.active').removeClass('active');
+
+        $(this).addClass('active');
+
+
+    });
+</script>*@
+
+
+
+
+

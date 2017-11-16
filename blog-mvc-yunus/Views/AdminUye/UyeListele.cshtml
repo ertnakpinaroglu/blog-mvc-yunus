@@ -1,0 +1,77 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<blog_mvc_yunus.Models.Uyeler>
+
+@{
+    ViewBag.Title = "UyeListele";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>UyeListele</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Yetkisi
+            
+        </th>
+        <th>
+            Ad Soyad
+            
+        </th>
+        <th>
+             Üye Fotosu
+           
+        </th>
+        <th>
+            Kayıt Tarihi
+          
+        </th>
+        <th>
+            Kullanıcı Adı
+          
+        </th>
+        
+      
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Yetkilendirme.Yetkisi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UyeAdSoyad)
+        </td>
+        <td>
+            <img src="@item.UyeFoto" class="img-circle" width="100"  />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tarih)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KullaniciAdi)
+        </td>
+        
+        <td>
+
+            <a href="/AdminUye/UyeDetay/@item.UyeId/" class="btn btn-success">
+                <span class="fa fa-info-circle"> Uye Detay</span>
+            </a>
+
+            <a href="/AdminUye/UyeSil/@item.UyeId/" class="btn btn-danger">
+                <span class="fa fa-trash"> Üye Sil</span>
+            </a>
+           
+         
+        </td>
+    </tr>
+}
+
+</table>
+
+<div class="col-md-4 col-md-offset-4">
+    <div class="pagedList">
+        @Html.PagedListPager(Model, sayfa => Url.Action("UyeListele", new { sayfa }), PagedListRenderOptions.PageNumbersOnly);
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@model IPagedList<blog_mvc_yunus.Models.Makaleler>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "SonMakaleler";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+<link href="~/Content/Arama.css" rel="stylesheet" />
+<style>
+    .col-sm-6 {
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="event-list">
+                @foreach (var item in Model)
+                {
+                    <li>
+
+                        <time datetime="2014-07-20 2000">
+                            <span class="day">@String.Format("{0:dd}", item.MakaleTarih)</span>
+                            <span class="month">@String.Format("{0:MMM}", item.MakaleTarih)</span>
+                            <span class="year">@String.Format("{0:yyyy}", item.MakaleTarih)</span>
+
+                        </time>
+                        <img alt="My 24th Birthday!" src="@item.MakaleFoto" />
+                        <div class="info">
+                            <h2 class="title">@item.MakaleBasligi</h2>
+                            <p class="desc">@Html.Raw(item.MakaleIcerik.Substring(0, 10))...</p>
+                            <ul>
+                                <li style="width:40%;">
+                                    <a href="/Home/MakaleDetay/@item.MakaleId" class="btn btn-warning">
+                                        <span class="fa fa-arrow-right">Makaleye Git</span>
+                                    </a>
+                                </li>
+                                <li style="width:30%;">@item.OkunmaSayisi<span class="glyphicon glyphicon-ok"></span></li>
+                                <li style="width:30%;">@item.Yorumlars.Count()<span class="fa fa-comment"></span></li>
+
+                            </ul>
+                        </div>
+                        <div class="social">
+                            <ul>
+                                <li class="facebook" style="width:33%;"><a href="#facebook"><span class="fa fa-facebook"></span></a></li>
+                                <li class="twitter" style="width:34%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>
+                                <li class="google-plus" style="width:33%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>
+                            </ul>
+                        </div>
+
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-4 col-md-offset-4">
+            @Html.PagedListPager(Model, sayfa => Url.Action("SonMakaleler", new { sayfa }), PagedListRenderOptions.PageNumbersOnly);
+        </div>
+    </div>
+</div>
+
+
+
+

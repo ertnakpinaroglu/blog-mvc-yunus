@@ -1,0 +1,26 @@
+##Kategoriye göre makaleleri listeleme##
+##Makaleyi Gösterme##
+##Makaleye Yorum Yapma & Begenme 
+##Hakkýmýzda sayfasý yapýmý
+##En popülerler 
+##En son makaleler
+#########################################
+##ADMÝN TARAFINDAKÝ ÝÞLER##
+##Makale Ekle Düzenle Sil##
+##Uye Ekle Duzenle Sil ##
+##Favorilere ekleme##
+##Admin Yorum##
+
+
+###############ANASAYFA EKSIKLIKLER
+##Anasayfa kategorilere göre sýralamanýn front-end tarafý düzenlenecek.
+##Anasayfa kategori sidebarda kategoriler front-end düzenlenecek ve badge class dinamikleþtirilecek.
+##Anasayfa blog-search yapýlacak.
+##Anasayfa footer düzeltilecek.
+
+###############KATEGORÝDETAY 
+##Id gizlenecek..
+##Menu anasayfa ile ayný olacak..
+
+
+### Yorum Yapma yapýlacak.

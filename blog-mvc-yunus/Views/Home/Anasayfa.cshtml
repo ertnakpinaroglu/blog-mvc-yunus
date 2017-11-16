@@ -1,0 +1,70 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using System.Web.Helpers;
+@model IPagedList<blog_mvc_yunus.Models.Kategoriler>
+@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<div>
+    <style>
+        .col-sm-6 {
+            margin-bottom: 10px;
+        }
+
+        #makaleList {
+            height: auto;
+            min-height: 220px;
+        }
+
+        a.list-group-item.active small {
+            color: #fff;
+        }
+    </style>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="well" >
+            <h1 class="text-center" style="font-family:Lobster;">Makale Kategorileri</h1>
+            <div class="list-group">
+                @foreach (var item in Model)
+                {
+                    <a href="/Home/MakaleListele/@item.KategoriId" style="margin-bottom:10px;" id="makaleList" class="list-group-item">
+                        <div class="media col-md-3">
+                            <figure class="pull-left">
+                                <img class="media-object img-rounded img-responsive" src="@item.Resim" width="350" height="250" alt="@item.KategoriAdi">
+                            </figure>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="list-group-item-heading"><b>@item.KategoriAdi</b> </h4>
+                            <p class="list-group-item-text">
+                                @item.Tanım
+                            </p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h2>@item.Makalelers.Count() <small> makale </small></h2>
+
+                            <button type="button" class="btn btn-warning btn-lg btn-block"> Makalelere Git <span class="fa fa-chevron-circle-right"></span> </button>
+
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4 col-md-offset-4">
+    <div class="pagedList">
+        @Html.PagedListPager(Model, sayfa => Url.Action("Anasayfa", new { sayfa }), PagedListRenderOptions.PageNumbersOnly)
+    </div>
+</div>
+
+
+
+
+
+
+

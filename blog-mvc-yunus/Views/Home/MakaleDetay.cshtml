@@ -1,0 +1,169 @@
+﻿@model blog_mvc_yunus.Models.Makaleler
+
+@{
+    ViewBag.Title = "MakaleDetay";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Blog Post - Start Bootstrap Template</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Content/css/blog-post.css" rel="stylesheet">
+    <link href="~/Content/Yorumlarcss.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Navigation -->
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-9">
+                <!-- Blog Post -->
+                <!-- Title -->
+                <h1>@Model.MakaleBasligi</h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    Yazar <a href="/Home/Hakkimizda">Ertan Akpınaroğlu</a>
+                    <span class="glyphicon glyphicon-time"></span> @String.Format("{0:D}",Model.MakaleTarih)
+                </p>
+                <hr>
+                <!-- Preview Image -->
+                <img class="img-responsive" src="@Model.MakaleFoto" alt="">
+                <hr>
+                <!-- Post Content -->
+                <p class="lead">
+                    @Html.Raw(Model.MakaleIcerik)
+                    
+                </p>
+                @using (Html.BeginForm())
+                {
+
+                    if (Session["uyeid"] != null)
+                    {
+                        <div class="well">
+                            <h4>Yorum Yap</h4>
+                            <form role="form">
+                                <div class="form-group">
+                                    <textarea id="gelenYorum" class="form-control" rows="3"></textarea>
+                                </div>
+                                <button id="btnYorumYap" type="submit" class="btn btn-primary">Yorum Yap</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>Yorum Yapabilmeniz için giriş yapmanız lazım. <a href="/Uye/Login/" class="btn btn-primary">Giriş Yap</a></p>
+                    }
+                }
+                <!-- yorumları listeleme-->
+                @foreach (var item in Model.Yorumlars.OrderByDescending(x => x.YorumTarihi))
+                {
+                    <div class="row">
+                        <!-- Contenedor Principal -->
+                        <div class="comments-container">
+
+                            <ul id="comments-list" class="comments-list">
+                                <li>
+                                    <div class="comment-main-level">
+                                        <!-- Avatar -->
+                                        <div class="comment-avatar"><img src="@item.Uyeler.UyeFoto" alt=""></div>
+                                        <!-- Contenedor del Comentario -->
+                                        <div class="comment-box">
+                                            <div class="comment-head">
+                                                <h6 class="comment-name"><a href="http://creaticode.com/blog">@item.Uyeler.UyeAdSoyad</a></h6>
+                                                <span>@item.YorumTarihi</span>
+                                                <i>
+                                                    @if (Convert.ToInt32(Session["uyeid"]) == item.UyeId)
+                                                    {
+                                                        <a href="/Home/YorumSil/@item.YorumId" class="glyphicon glyphicon-remove">Sil</a>
+                                                    }
+                                                </i>
+
+                                            </div>
+                                            <div class="comment-content">
+                                                @item.YorumIcerik
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+                @*@foreach (var item in Model.Yorumlars.ToList())
+                {
+                    <div class="media">
+                        <a class="pull-left" href="/Uye/UyeDetay/@item.UyeId">
+                            <img class="media-object" src="@item.Uyeler.UyeFoto" width="75" height="75" alt="@item.Uyeler.UyeAdSoyad">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                @item.Uyeler.KullaniciAdi
+                                <small>@item.YorumTarihi</small>
+                            </h4>
+                            @item.YorumIcerik
+
+                            @if (Convert.ToInt32(Session["uyeid"]) == item.UyeId)
+                            {
+                                <a href="/Home/YorumSil/@item.YorumId" class="btn btn-danger">Yorum Sil</a>
+                            }
+
+                        </div>
+                    </div>
+                }*@
+
+            </div>
+            <!-- Blog Sidebar Widgets Column -->
+
+        </div>
+        <!-- /.row -->
+        <hr>
+        <!-- Footer -->
+
+    </div>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="~/Content/js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Content/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Home/OkunmasayisiniArttir/',
+                data: { id:@Model.MakaleId},
+                type: 'POST'
+            });
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnYorumYap").click(function () {
+                var gelenVeri = $("#gelenYorum").val();
+                $.ajax({
+                    url: '/Home/YorumYap/',
+                    data: { yorum: gelenVeri, makaleId:@Model.MakaleId },
+                    type: 'POST',
+                    dataType: 'json',
+
+                });
+            });
+        });
+    </script>
+
+   
+</body>
+</html>

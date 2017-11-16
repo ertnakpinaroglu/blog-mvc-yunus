@@ -1,0 +1,61 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<blog_mvc_yunus.Models.Yorumlar>
+
+@{
+    ViewBag.Title = "YorumListele";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>YorumListele</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Makale Başlığı
+            
+        </th>
+        <th>
+            Üye Ad Soyad
+           
+        </th>
+        <th>
+            Yorum İceriği
+           
+        </th>
+        <th>
+            Yorum Tarihi
+            
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Makaleler.MakaleBasligi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uyeler.UyeAdSoyad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YorumIcerik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YorumTarihi)
+        </td>
+        <td>          
+           <a href="/AdminYorum/YorumSil/@item.YorumId" class=" btn btn-danger">
+               <span class="fa fa-trash"> Yorumu Sil</span>
+           </a>
+        </td>
+    </tr>
+}
+
+</table>
+<div class="col-md-4 col-md-offset-4">
+    <div class="pagedList">
+        @Html.PagedListPager(Model, sayfa => Url.Action("YorumListele", new { sayfa }), PagedListRenderOptions.PageNumbersOnly);
+    </div>
+</div>

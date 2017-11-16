@@ -1,0 +1,54 @@
+﻿@model blog_mvc_yunus.Models.Kategoriler
+
+@{
+    ViewBag.Title = "Sil";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Sil</h2>
+
+<h3>Bu kategoriyi silmek istediğinize eminmisiniz?</h3>
+<div>
+    <h4>Kategoriler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KategoriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KategoriAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tanım)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tanım)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resim)
+        </dt>
+
+        <dd>
+            <img src="@Model.Resim" class="img-circle" width="100" />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+
+            <a href="/Admin/Listele/" class="btn btn-primary">
+                <span class="fa fa-backward"> Geri</span>
+            </a>
+
+            <input type="submit" value="Sil" class="btn btn-danger" /> 
+           
+        </div>
+    }
+</div>

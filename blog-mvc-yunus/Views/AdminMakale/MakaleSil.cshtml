@@ -1,0 +1,69 @@
+﻿@model blog_mvc_yunus.Models.Makaleler
+
+@{
+    ViewBag.Title = "MakaleSil";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="text-center">Makale Silme Sayfasi</h2>
+
+<h3>Bu makaleyi silmek istediğinize eminmisiniz?</h3>
+<div>
+    <h4>Makaleler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategoriler.KategoriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategoriler.KategoriAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MakaleBasligi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MakaleBasligi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MakaleIcerik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MakaleIcerik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MakaleFoto)
+        </dt>
+
+        <dd>
+           <img src="@Model.MakaleFoto" width="100" class="img-circle" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MakaleTarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MakaleTarih)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a href="/AdminMakale/MakaleListele/" class="btn btn-primary">
+                <span class=" fa fa-backward"> Geri</span>
+            </a>
+            <input type="submit" value="Sil" class="btn btn-danger" /> 
+           
+
+        </div>
+    }
+</div>
